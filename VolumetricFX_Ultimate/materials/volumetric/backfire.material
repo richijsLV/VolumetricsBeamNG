@@ -1,0 +1,50 @@
+
+<material name="volumetric_backfire">
+    <technique name="particle">
+        <pass>
+            <blend src="src_alpha" dest="one"/>
+            <depth_write enable="false"/>
+            <vertex_shader>
+                <![CDATA[
+                #version 410
+                in vec3 in_position;
+                in vec2 in_texcoord;
+                in float in_size;
+                in vec4 in_color;
+                out vec2 vUV;
+                out vec4 vColor;
+                void main() {
+                    vUV = in_texcoord;
+                    vColor = in_color;
+                    // Billboard calculation handled by engine usually, simplifying here
+                    gl_Position = projectionMatrix * viewMatrix * modelMatrix * vec4(in_position, 1.0);
+                    gl_PointSize = in_size;
+                }
+                ]]>
+            </vertex_shader>
+            <fragment_shader>
+                <![CDATA[
+                #version 410
+                in vec2 vUV;
+                in vec4 vColor;
+                out vec4 fragColor;
+                
+                void main() {
+                    // Circular particle
+                    float dist = length(gl_PointCoord - vec2(0.5));
+                    if(dist > 0.5) discard;
+                    
+                    float alpha = 1.0 - (dist * 2.0);
+                    alpha *= vColor.a;
+                    
+                    vec3 fireCol = vColor.rgb;
+                    // Add yellow/white center
+                    fireCol += vec3(1.0, 1.0, 0.8) * (1.0 - dist * 2.0);
+                    
+                    fragColor = vec4(fireCol, alpha);
+                }
+                ]]>
+            </fragment_shader>
+        </pass>
+    </technique>
+</material>

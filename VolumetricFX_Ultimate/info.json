@@ -1,0 +1,37 @@
+{
+    "id": "gefx_volumetric_ultimate",
+    "name": "Volumetric FX Ultimate",
+    "version": "1.0.0",
+    "author": "GefX Studios",
+    "description": "High-quality DX11 volumetric sky, clouds, fog, and backfire system with advanced UI.",
+    "tags": [
+        "graphics",
+        "sky",
+        "clouds",
+        "fog",
+        "effects",
+        "ui"
+    ],
+    "content": {
+        "Skybox": [
+            "materials/volumetric/sky.material"
+        ],
+        "Clouds": [
+            "materials/volumetric/clouds.material",
+            "particles/clouds.particle"
+        ],
+        "Fog": [
+            "materials/volumetric/fog.material"
+        ],
+        "Backfire": [
+            "particles/backfire.particle",
+            "materials/volumetric/backfire.material"
+        ],
+        "Scripts": [
+            "lua/gefx/init.lua",
+            "lua/gefx/*.lua",
+            "lua/apps/volumetric_ui.lua"
+        ]
+    },
+    "dependencies": []
+}

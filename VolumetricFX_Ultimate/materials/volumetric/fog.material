@@ -1,0 +1,36 @@
+
+<material name="volumetric_fog">
+    <technique name="forward">
+        <pass>
+            <blend src="src_alpha" dest="one_minus_src_alpha"/>
+            <vertex_shader>
+                <![CDATA[
+                #version 410
+                in vec3 in_position;
+                out float vHeight;
+                void main() {
+                    vHeight = in_position.y;
+                    gl_Position = projectionMatrix * viewMatrix * modelMatrix * vec4(in_position, 1.0);
+                }
+                ]]>
+            </vertex_shader>
+            <fragment_shader>
+                <![CDATA[
+                #version 410
+                in float vHeight;
+                out vec4 fragColor;
+                
+                uniform vec3 fogColor;
+                uniform float density;
+                uniform float maxHeight;
+                
+                void main() {
+                    float alpha = 1.0 - smoothstep(0.0, maxHeight, vHeight);
+                    alpha *= density * 500.0;
+                    fragColor = vec4(fogColor, alpha);
+                }
+                ]]>
+            </fragment_shader>
+        </pass>
+    </technique>
+</material>

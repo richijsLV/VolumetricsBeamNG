@@ -1,0 +1,13 @@
+
+<particle name="clouds_layer">
+    <emitter type="box">
+        <size>2000 100 2000</size>
+        <rate>10</rate>
+        <velocity>0 0 0</velocity>
+        <size min="50" max="150"/>
+        <color start="1 1 1 0.5" end="1 1 1 0.5"/>
+        <lifetime>9999</lifetime>
+        <material>volumetric_clouds</material>
+        <static>true</static>
+    </emitter>
+</particle>

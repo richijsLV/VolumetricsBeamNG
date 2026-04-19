@@ -1,70 +1,36 @@
 ```
-# Compiled and build artifacts
+# Build artifacts
+build/
+dist/
 *.pyc
 __pycache__/
-*.o
-*.obj
-*.exe
-*.dll
-*.so
-*.a
-*.out
 
-# Dependencies
-node_modules/
-venv/
-.venv/
+# Environment files
 .env
 .env.local
-.env.*
+*.env.*
 
-# Logs and temp files
-*.log
-*.tmp
-*.swp
-
-# Editors
+# Editor/IDE files
 .vscode/
 .idea/
+*.swp
+*.swo
+*.tmp
 
-# OS generated files
-.DS_Store
-Thumbs.db
+# Logs
+*.log
 
 # Coverage reports
 coverage/
 htmlcov/
 .coverage
 
-# Build directories
-dist/
-build/
-target/
-.gradle/
+# Python cache
+.mypy_cache/
+.pytest_cache/
 
-# Python specific
-*.py[cod]
-*$py.class
-*.so
-.Python
-build/
-develop-eggs/
-.installed.cfg
-lib/
-lib64/
-parts/
-sdist/
-var/
-wheels/
-*.egg-info/
-.egg-info/
-.eggs/
-
-# Lua specific build artifacts (if any)
-*.luac
-.luacache/
-
-# Compressed files
+# Distribution packages
+*.tar.gz
 *.zip
 *.gz
 *.tar
@@ -74,17 +40,4 @@ wheels/
 *.7z
 *.rar
 *.zst
-*.lz4
-*.lzh
-*.cab
-*.arj
-*.rpm
-*.deb
-*.Z
-*.lz
-*.lzo
-*.tar.gz
-*.tar.bz2
-*.tar.xz
-*.tar.zst
 ```
