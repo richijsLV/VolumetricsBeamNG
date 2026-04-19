@@ -1,0 +1,56 @@
+
+<material name="volumetric_sky">
+    <technique name="forward">
+        <pass>
+            <vertex_shader>
+                <![CDATA[
+                #version 410
+                layout(location = 0) in vec3 in_position;
+                out vec3 vWorldPos;
+                void main() {
+                    vWorldPos = in_position;
+                    gl_Position = projectionMatrix * viewMatrix * modelMatrix * vec4(in_position, 1.0);
+                }
+                ]]>
+            </vertex_shader>
+            <fragment_shader>
+                <![CDATA[
+                #version 410
+                in vec3 vWorldPos;
+                out vec4 fragColor;
+                
+                uniform vec3 sunDirection;
+                uniform vec3 sunColor;
+                uniform float time;
+                
+                // Simple Rayleigh/Mie approximation for DX11
+                vec3 getSkyColor(vec3 dir) {
+                    float sunUp = dot(dir, sunDirection);
+                    vec3 horizonColor = vec3(0.5, 0.7, 0.9);
+                    vec3 zenithColor = vec3(0.1, 0.2, 0.4);
+                    vec3 sunsetColor = vec3(1.0, 0.4, 0.1);
+                    
+                    float horizonMix = pow(1.0 - abs(dir.y), 3.0);
+                    vec3 baseColor = mix(zenithColor, horizonColor, horizonMix);
+                    
+                    // Sunset effect
+                    if(sunUp < 0.2 && sunUp > -0.2) {
+                        baseColor = mix(baseColor, sunsetColor, (0.2 - sunUp) * 2.0);
+                    }
+                    
+                    // Sun disk
+                    float sunDisk = pow(max(0.0, dot(dir, sunDirection)), 128.0);
+                    baseColor += sunColor * sunDisk * 5.0;
+                    
+                    return baseColor;
+                }
+                
+                void main() {
+                    vec3 dir = normalize(vWorldPos);
+                    fragColor = vec4(getSkyColor(dir), 1.0);
+                }
+                ]]>
+            </fragment_shader>
+        </pass>
+    </technique>
+</material>
