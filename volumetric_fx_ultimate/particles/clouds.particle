@@ -1,0 +1,35 @@
+// Volumetric Cloud Particle System Definition
+// Used for cloud formation and animation
+
+ParticleClouds {
+    name = "volumetric_clouds"
+    
+    // Emitter settings
+    emitterCount = 4
+    emissionRate = 0
+    
+    // Particle settings
+    maxParticles = 1000
+    lifetime = 60.0
+    size = 500.0
+    
+    // Initial state
+    position = {0, 2000, 0}
+    velocity = {0, 0, 0}
+    sizeOverLifetime = "constant"
+    colorOverLifetime = "cloud_fade"
+    
+    // Animation
+    animationType = "noise_scroll"
+    noiseScale = 0.01
+    noiseSpeed = {0.5, 0.0, 0.3}
+    
+    // Rendering
+    material = "materials/volumetric/clouds.material"
+    sortMode = "none"
+    castShadows = false
+    
+    // Vulkan optimization
+    gpuSimulation = true
+    computeBuffer = true
+}

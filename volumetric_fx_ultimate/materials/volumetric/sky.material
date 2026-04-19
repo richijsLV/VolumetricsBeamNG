@@ -1,0 +1,35 @@
+// Volumetric Sky Material - Vulkan Compatible
+// Advanced atmospheric scattering shader definition
+
+$shadername: "volumetric_sky"
+$shadertag: "sky volumetric vulkan"
+
+// Vertex Shader
+vs: vs_volumetric_sky.hlsl
+
+// Pixel Shader  
+ps: ps_volumetric_sky.hlsl
+
+// Render state configuration
+$renderqueue: "Skybox"
+$depthwrite: false
+$depthtest: LEQUAL
+$cullmode: NONE
+
+// Texture slots
+texture0: "artsky/sky_gradient.dds"
+texture1: "artsky/stars.dds"
+texture2: "artsky/cloud_noise.dds"
+
+// Uniform parameters
+param0: "skyIntensity" float 1.0
+param1: "sunsetColor" vec3 1.0 0.4 0.2
+param2: "nightIntensity" float 0.3
+param3: "starBrightness" float 0.8
+param4: "sunPosition" vec3 0.0 1.0 0.0
+param5: "atmosphereDensity" float 1.0
+
+// Vulkan-specific optimizations
+$vulkan_compatible: true
+$spirv_optimize: true
+$descriptor_set_layout: "sky_descriptor"
