@@ -1,0 +1,46 @@
+// Backfire Flame Particle Material - Vulkan Compatible
+// GPU-accelerated particle system for exhaust flames
+
+$shadername: "backfire_flame"
+$shadertag: "particle flame fire vulkan gpu"
+
+// Vertex Shader
+vs: vs_backfire_particle.hlsl
+
+// Pixel Shader  
+ps: ps_backfire_particle.hlsl
+
+// Render state configuration
+$renderqueue: "Particle"
+$depthwrite: false
+$depthtest: LESS
+$cullmode: NONE
+$blendmode: "ADDITIVE_BLEND"
+
+// Texture slots
+texture0: "particles/flame_gradient.dds"
+texture1: "particles/flame_noise.dds"
+texture2: "particles/spark.dds"
+
+// Uniform parameters
+param0: "flameIntensity" float 1.0
+param1: "flameSize" float 1.5
+param2: "flameDuration" float 0.3
+param3: "gravity" vec3 0.0 -9.8 0.0
+param4: "turbulence" float 2.0
+param5: "flameColor" vec3 1.0 0.7 0.3
+param6: "coreColor" vec3 1.0 0.9 0.6
+param7: "smokeColor" vec3 0.3 0.3 0.35
+
+// Particle animation
+param8: "frameCount" int 8
+param9: "animationSpeed" float 30.0
+
+// Screen shake intensity (passed to post-process)
+param10: "shakeIntensity" float 0.5
+
+// Vulkan-specific optimizations
+$vulkan_compatible: true
+$spirv_optimize: true
+$descriptor_set_layout: "particle_descriptor"
+$compute_shader: "cs_backfire_update.hlsl"

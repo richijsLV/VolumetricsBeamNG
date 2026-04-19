@@ -1,0 +1,13 @@
+{
+  "id": "volumetric_fx_ultimate",
+  "name": "Volumetric FX Ultimate",
+  "version": "1.0.0",
+  "description": "Advanced volumetric skybox, clouds, fog, and backfire effects with Vulkan API support and professional UI configuration.",
+  "author": "VFX Studios",
+  "type": "extension",
+  "tags": ["graphics", "volumetric", "sky", "clouds", "fog", "effects", "vulkan"],
+  "dependencies": [],
+  "loadBefore": [],
+  "loadAfter": [],
+  "icon": "ui/images/icon.png"
+}

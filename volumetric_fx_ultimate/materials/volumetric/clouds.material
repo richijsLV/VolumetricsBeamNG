@@ -1,0 +1,43 @@
+// Volumetric Clouds Material - Vulkan Compatible
+// Advanced cloud rendering with raymarching support
+
+$shadername: "volumetric_clouds"
+$shadertag: "clouds volumetric vulkan raymarch"
+
+// Vertex Shader
+vs: vs_volumetric_clouds.hlsl
+
+// Pixel Shader  
+ps: ps_volumetric_clouds.hlsl
+
+// Render state configuration
+$renderqueue: "Transparent"
+$depthwrite: false
+$depthtest: LESS
+$cullmode: BACK
+$blendmode: "ALPHA_BLEND"
+
+// Texture slots
+texture0: "artsky/cloud_noise.dds"
+texture1: "artsky/cloud_detail.dds"
+texture2: "artsky/cloud_shadow.dds"
+
+// Uniform parameters
+param0: "cloudDensity" float 0.6
+param1: "cloudCoverage" float 0.5
+param2: "cloudHeight" float 2000.0
+param3: "cloudSpeed" float 0.02
+param4: "windDirection" vec2 1.0 0.0
+param5: "volumetricLighting" int 1
+param6: "lightAbsorption" float 0.3
+param7: "scatteringCoeff" vec3 0.7 0.75 0.8
+
+// Raymarching settings
+param8: "raySteps" int 32
+param9: "stepSize" float 50.0
+
+// Vulkan-specific optimizations
+$vulkan_compatible: true
+$spirv_optimize: true
+$descriptor_set_layout: "cloud_descriptor"
+$push_constant_range: "cloud_params"

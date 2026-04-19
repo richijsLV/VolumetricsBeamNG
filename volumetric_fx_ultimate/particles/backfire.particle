@@ -1,0 +1,63 @@
+// Backfire Flame Particle System Definition
+// Multi-emitter exhaust flame effect
+
+ParticleBackfire {
+    name = "backfire_flame"
+    
+    // Emitter settings
+    emitterType = "cone"
+    emissionRate = 0  // Triggered on demand
+    burstCount = 30
+    
+    // Particle settings
+    maxParticles = 100
+    lifetime = 0.3
+    size = 0.5
+    
+    // Initial state
+    position = {0, 0.5, -2}  // Exhaust pipe position (dynamic)
+    velocityMin = {−1, 2, −1}
+    velocityMax = {1, 4, 1}
+    velocityOverLifetime = "decay"
+    
+    // Size animation
+    sizeOverLifetime = "expand_then_fade"
+    sizeCurve = {
+        {time = 0.0, value = 0.5},
+        {time = 0.3, value = 1.5},
+        {time = 1.0, value = 0.0}
+    }
+    
+    // Color animation
+    colorOverLifetime = "flame_gradient"
+    colorCurve = {
+        {time = 0.0, r = 1.0, g = 0.9, b = 0.6, a = 1.0},
+        {time = 0.3, r = 1.0, g = 0.7, b = 0.3, a = 0.8},
+        {time = 0.6, r = 1.0, g = 0.4, b = 0.1, a = 0.4},
+        {time = 1.0, r = 0.3, g = 0.3, b = 0.35, a = 0.0}
+    }
+    
+    // Physics
+    gravity = {0, -9.8, 0}
+    drag = 0.5
+    turbulence = 2.0
+    
+    // Rendering
+    material = "materials/volumetric/backfire.material"
+    blendMode = "additive"
+    sortMode = "none"
+    
+    // Sub-emitters
+    subEmitter = {
+        type = "spark"
+        chance = 0.3
+        count = 5
+        material = "materials/volumetric/backfire.material"
+        textureSlot = 2
+    }
+    
+    // Vulkan optimization
+    gpuSimulation = true
+    computeBuffer = true
+    indirectDraw = true
+}
